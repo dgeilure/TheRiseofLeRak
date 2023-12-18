@@ -104,7 +104,7 @@ public class ShowGesture : MonoBehaviour
             //instantiate object at tip position
             //should also have a transform parent as the last parameter so that the objects don't just float around randomly in the hierarchy //this.transform if the script is on another gameobject
             Instantiate(gestureVisualisationPrefab, tipPosition, objectRotation, this.transform);
-            Debug.Log("GESTURING");
+            //Debug.Log("GESTURING");
             yield return new WaitForSeconds(time);
         }
         yield return new WaitForSeconds(time);

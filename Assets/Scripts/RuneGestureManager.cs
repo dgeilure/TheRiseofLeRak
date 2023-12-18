@@ -22,7 +22,7 @@ public class RuneGestureManager : MonoBehaviour
         {
             string errorMessage = GestureRecognition.getErrorMessage(gestureCompletionData.gestureID);//s
             Debug.Log("Gesture not recognized " + errorMessage);//d
-            tableMaterial.SetColor("_Color", Color.red);//d
+            tableMaterial.SetColor("_Color", Color.white);//d
             return;
         } 
 
@@ -34,16 +34,18 @@ public class RuneGestureManager : MonoBehaviour
             //all numbers besides 0 are placeholders for the actual IDs of the gestures once they get trained
             if (gestureCompletionData.gestureID == 0 || gestureCompletionData.gestureID == 3)//d 
             {
-                tableMaterial.SetColor("_Color", Color.green); //d
-                Debug.Log("Gesture = Spiral");//d
+                tableMaterial.SetColor("_Color", Color.red); //d
+                Debug.Log("Gesture = Attack");//d
             }
             if (gestureCompletionData.gestureID == 1 || gestureCompletionData.gestureID == 4) //d
             {
-
+                tableMaterial.SetColor("_Color", Color.green); //d
+                Debug.Log("Gesture = Protect");//d
             }            
             if (gestureCompletionData.gestureID == 2 || gestureCompletionData.gestureID == 5)//d
             {
-
+                tableMaterial.SetColor("_Color", Color.magenta); //d
+                Debug.Log("Gesture = Malice");//d
             }
         }
     }

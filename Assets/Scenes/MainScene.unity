@@ -1100,7 +1100,7 @@ MonoBehaviour:
   LicenseName: 
   LicenseKey: 
   LicenseFilePath: 
-  GestureDatabaseFile: Sample_OneHanded_MyGestures.dat
+  GestureDatabaseFile: Rune_Gestures_right.dat
   unityXrPlugin: 1
   mivryCoordinateSystem: 1
   LeftHand: {fileID: 24203539}
@@ -1854,7 +1854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wandTip: {fileID: 1004429629}
   gestureVisualisationPrefab: {fileID: 4349027516737726787, guid: 4ac67aac38053224180baa06d043e71d, type: 3}
-  timeBetweenSpawns: 0.045
+  timeBetweenSpawns: 0.001
 --- !u!4 &2080753538
 Transform:
   m_ObjectHideFlags: 0
