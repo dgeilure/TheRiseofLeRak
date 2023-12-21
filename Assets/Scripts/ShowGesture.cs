@@ -23,7 +23,7 @@ public class ShowGesture : MonoBehaviour
 
     private bool gesturing = false;
 
-    private Coroutine showGestureCor; 
+    private Coroutine showGestureCor;
 
     [SerializeField][Tooltip("Empty GameObject positioned on the tip of the wand")] 
     private GameObject wandTip;
@@ -37,9 +37,6 @@ public class ShowGesture : MonoBehaviour
 
     // functions
 
-
-    // TO DO send events from the input manager in the scene to this function :)
-    // Inspired from MiVRy script
     // gets called when left trigger gets pressed
     // parameter is info from event
     public void OnInputLeftTrigger(InputAction.CallbackContext context)
@@ -56,6 +53,7 @@ public class ShowGesture : MonoBehaviour
         Debug.Log("RIGHT TRIGGER");
     }
 
+    // Inspired from MiVRy script
     private void w_i_p(InputAction.CallbackContext callbackContext) //TO DO give it a name lol
     {
         if (callbackContext.action.type == InputActionType.Button)
@@ -74,7 +72,8 @@ public class ShowGesture : MonoBehaviour
                 Debug.Log("STOPPED");
                 StopGestureCor();
                 gesturing = false;
-                //TO DO start new countdown cor (like maybe 2 seconds) where gesture stays, then disappears --> in there: gesture disappears (gameobjects get removed)
+                //TO DO start new countdown cor (like maybe 2 seconds) where gesture stays, then disappears
+                //--> in there: gesture disappears (gameobjects get removed)
                 DestroyObjects();
             }
             return;
@@ -102,7 +101,8 @@ public class ShowGesture : MonoBehaviour
             tipPosition = wandTip.transform.position;
 
             //instantiate object at tip position
-            //should also have a transform parent as the last parameter so that the objects don't just float around randomly in the hierarchy //this.transform if the script is on another gameobject
+            //should also have a transform parent as the last parameter so that the objects don't just float around randomly in the hierarchy 
+            //this.transform if the script is on another gameobject
             Instantiate(gestureVisualisationPrefab, tipPosition, objectRotation, this.transform);
             //Debug.Log("GESTURING");
             yield return new WaitForSeconds(time);
@@ -110,6 +110,8 @@ public class ShowGesture : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
+    //the object with the script attached (so the current "this") CANNOT HAVE CHILD-OBJECTS since they get deleted with this method 
+    //every time the trigger on the controller gets pressed
     private void DestroyObjects()
     {
         int particleCount = this.transform.childCount;
