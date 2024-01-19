@@ -35,7 +35,7 @@
  * 
  * 
  * (3) In the inspector, set the fields of the MiVRy script components:
- * - "GestureDatabaseFile":
+ * - "":
  *   The path to the gesture recognition database file to load.
  *   In the editor, this will be relative to the Assets/ folder.
  *   In stand-alone (build), this will be relative to the StreamingAssets/ folder.
@@ -225,7 +225,7 @@ public class Mivry : MonoBehaviour
     /// In stand-alone (build), this will be relative to the StreamingAssets/ folder.
     /// </summary>
     [Tooltip("Path to the .dat file to load gestures from.")]
-    public string GestureDatabaseFile = "";
+    public string GestureDatabaseFile = "Rune_Gestures_right.dat";
 
     /// <summary>
     /// Which Unity XR plugin is being used by this project.
@@ -234,13 +234,13 @@ public class Mivry : MonoBehaviour
     /// See the Unity Package Manager and Project Settings -> XR Plugin Manager to see which plugin is being used.
     /// </summary>
     [Tooltip("The Unity XR plugin used in this project (see: Project Settings -> XR Plugin Manager).")]
-    public UnityXrPlugin unityXrPlugin = UnityXrPlugin.OpenXR;
+    public UnityXrPlugin unityXrPlugin = UnityXrPlugin.OculusVR;
 
     /// <summary>
     /// The coordinate system MiVRy should use internally (or that the GestureDatabase file was created with).
     /// </summary>
     [Tooltip("The coordinate system MiVRy should use internally (or that the GestureDatabase file was created with).")]
-    public MivryCoordinateSystem mivryCoordinateSystem = MivryCoordinateSystem.Unity_OpenXR;
+    public MivryCoordinateSystem mivryCoordinateSystem = MivryCoordinateSystem.Unity_OculusVR;
 
     /// <summary>
     /// A game object that will be used as the position of the left hand.
@@ -253,14 +253,14 @@ public class Mivry : MonoBehaviour
     /// which will be used to start/end the gesture.
     /// </summary>
     [Tooltip("The name of the input (in Project Settings -> Input Manager) or Input System Control ('<XRController>{LeftHand}/trigger') that triggers the start/end of a gesture.")]
-    public string LeftTriggerInput = "";
+    public string LeftTriggerInput = "<XRController>{LeftHand}/trigger"; 
 
     /// <summary>
     /// The type of the input (Axis, Button, or Key) which triggers the gesture.
     /// "Input System Control" when using the new Input System.
     /// </summary>
     [Tooltip("Type of the input (in Project Settings -> Input Manager) that triggers the start/end of a gesture. 'Input System Control' when using the new Input System. 'Value' to manually set LeftTriggerValue.")]
-    public InputType LeftTriggerInputType = InputType.Axis;
+    public InputType LeftTriggerInputType = InputType.Button;
 
     /// <summary>
     /// The current value of the trigger input will be stored here.
@@ -287,14 +287,14 @@ public class Mivry : MonoBehaviour
     /// which will be used to start/end the gesture.
     /// </summary>
     [Tooltip("The name of the input (in Project Settings -> Input Manager) or Input System Control ('<XRController>{LeftHand}/trigger') that triggers the start/end of a gesture.")]
-    public string RightTriggerInput = "";
+    public string RightTriggerInput = "<XRController>{RightHand}/trigger";
 
     /// <summary>
     /// The type of the input (Axis, Button, or Key) which triggers the gesture.
     /// "Input System Control" when using the new Input System.
     /// </summary>
     [Tooltip("Type of the input (in Project Settings -> Input Manager) that triggers the start/end of a gesture. 'Input System Control' when using the new Input System. 'Value' to manually set RightTriggerValue.")]
-    public InputType RightTriggerInputType = InputType.Axis;
+    public InputType RightTriggerInputType = InputType.Button;
 
     /// <summary>
     /// The current value of the trigger input will be stored here.
@@ -539,17 +539,20 @@ public class Mivry : MonoBehaviour
     void Start()
     {
         int ret;
+        // Find the location for the gesture database (.dat) file
 #if UNITY_EDITOR
         // When running the scene inside the Unity editor,
         // we can just load the file from the Assets/ folder:
-        string GesturesFilePath = "Assets";
+        string GesturesFilePath = "Assets/";
 #elif UNITY_ANDROID
         // On android, the file is in the .apk,
         // so we need to first "download" it to the apps' cache folder.
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-        string GesturesFilePath = activity.Call <AndroidJavaObject>("getCacheDir").Call<string>("getCanonicalPath");
-        UnityWebRequest request = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + GestureDatabaseFile);
+        string GesturesFilePath = activity.Call
+                                <AndroidJavaObject>("getCacheDir").Call<string>("getCanonicalPath");
+        UnityWebRequest request = UnityWebRequest.Get(Application.streamingAssetsPath 
+                                + "/" + GestureDatabaseFile);
         request.SendWebRequest();
         while (!request.isDone) {
             // wait for file extraction to finish

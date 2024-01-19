@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12733836, g: 0.13418841, b: 0.12118524, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2559,16 +2559,16 @@ MonoBehaviour:
   LicenseName: 
   LicenseKey: 
   LicenseFilePath: 
-  GestureDatabaseFile: StreamingAssests/Rune_Gestures_right.dat
+  GestureDatabaseFile: Rune_Gestures_right.dat
   unityXrPlugin: 1
   mivryCoordinateSystem: 1
   LeftHand: {fileID: 24203539}
-  LeftTriggerInput: 
-  LeftTriggerInputType: 0
+  LeftTriggerInput: <XRController>{LeftHand}/trigger
+  LeftTriggerInputType: 2
   LeftTriggerValue: 0
   LeftTriggerThreshold: 0.9
   RightHand: {fileID: 1064385424}
-  RightTriggerInput: 
+  RightTriggerInput: <XRController>{RightHand}/trigger
   RightTriggerInputType: 2
   RightTriggerValue: 0
   RightTriggerThreshold: 0.9
