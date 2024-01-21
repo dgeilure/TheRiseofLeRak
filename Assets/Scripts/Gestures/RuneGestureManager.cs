@@ -23,12 +23,11 @@ public class RuneGestureManager : MonoBehaviour
 
     public void OnGestureCompleted(GestureCompletionData gestureCompletionData)//s
     {
-        if (gestureCompletionData.gestureID < 0)//s, J: funktioniert nicht wird immer gecallt, aber erst nach zweitem if ? 
-        //if (gestureCompletionData.similarity < 0.5)   J: funktioniert auch nicht wird immer gecallt, aber erst nach zweitem if ? 
+        if (gestureCompletionData.gestureID < 0)//s, J: wird nie gecallt weil keine gesture completed
         {
             string errorMessage = GestureRecognition.getErrorMessage(gestureCompletionData.gestureID);//s
             Debug.Log("Gesture not recognized " + errorMessage);//d
-            //tableMaterial.SetColor("_Color", Color.white);//d J: vorübergehenede Lösung damit Block nicht immer nur für einen Frame Farbe wechselt
+            tableMaterial.SetColor("_Color", Color.white);//d 
             return;
         } 
 
