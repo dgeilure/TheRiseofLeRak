@@ -2695,16 +2695,16 @@ MonoBehaviour:
   LicenseKey: 
   LicenseFilePath: 
   GestureDatabaseFile: Rune_Gestures_right.dat
-  unityXrPlugin: 1
-  mivryCoordinateSystem: 1
+  unityXrPlugin: 0
+  mivryCoordinateSystem: 0
   LeftHand: {fileID: 235422194}
-  LeftTriggerInput: <XRController>{LeftHand}/trigger
-  LeftTriggerInputType: 1
+  LeftTriggerInput: <XRController>{LeftHand}/triggerPressed
+  LeftTriggerInputType: 0
   LeftTriggerValue: 0
   LeftTriggerThreshold: 0.9
   RightHand: {fileID: 235422193}
-  RightTriggerInput: <XRController>{RightHand}/trigger
-  RightTriggerInputType: 1
+  RightTriggerInput: <XRController>{RightHand}/triggerPressed
+  RightTriggerInputType: 0
   RightTriggerValue: 0
   RightTriggerThreshold: 0.9
   ContinuousGestureRecognition: 0
@@ -4477,8 +4477,8 @@ SceneRoots:
   - {fileID: 216557618}
   - {fileID: 1072429685}
   - {fileID: 659700051}
-  - {fileID: 2120563250}
   - {fileID: 708700932}
+  - {fileID: 2120563250}
   - {fileID: 124525680}
   - {fileID: 874911933}
   - {fileID: 1539247745}
