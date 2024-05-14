@@ -23,7 +23,7 @@ public class RuneGestureManager : MonoBehaviour
 
     public void OnGestureCompleted(GestureCompletionData gestureCompletionData)//s
     {
-        if (gestureCompletionData.gestureID < 0)//s, J: wird nie gecallt weil keine gesture completed
+        if (gestureCompletionData.gestureID == -1)//S; J: for some reason '<0' doesnt work, it has to be '== -1'
         {
             string errorMessage = GestureRecognition.getErrorMessage(gestureCompletionData.gestureID);//s
             Debug.Log("Gesture not recognized " + errorMessage);//d

@@ -260,7 +260,7 @@ public class Mivry : MonoBehaviour
     /// "Input System Control" when using the new Input System.
     /// </summary>
     [Tooltip("Type of the input (in Project Settings -> Input Manager) that triggers the start/end of a gesture. 'Input System Control' when using the new Input System. 'Value' to manually set LeftTriggerValue.")]
-    public InputType LeftTriggerInputType = InputType.Button;//j
+    public InputType LeftTriggerInputType = InputType.Axis;//j
 
     /// <summary>
     /// The current value of the trigger input will be stored here.
@@ -294,7 +294,7 @@ public class Mivry : MonoBehaviour
     /// "Input System Control" when using the new Input System.
     /// </summary>
     [Tooltip("Type of the input (in Project Settings -> Input Manager) that triggers the start/end of a gesture. 'Input System Control' when using the new Input System. 'Value' to manually set RightTriggerValue.")]
-    public InputType RightTriggerInputType = InputType.Button; //j
+    public InputType RightTriggerInputType = InputType.Axis; //j
 
     /// <summary>
     /// The current value of the trigger input will be stored here.
