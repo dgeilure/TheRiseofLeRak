@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     //VARIABLES
 
     [SerializeField]
-    public EnemyController enemyController;
+    private EnemyController enemyController;
 
     public CharacterStats playerStats;
 
@@ -65,6 +65,12 @@ public class PlayerController : MonoBehaviour
 
     public void playerProtection() // to do checkup if this makes sense and works
     {
+        if (enemyController.fightStarted == false)
+        {
+            enemyController.fightStarted = true;
+            enemyController.fight();
+        }
+
         if (playerStats.getMana() > spellManaCost)
         {
             playerCurrentHealth = playerStats.getHealth();
@@ -79,6 +85,11 @@ public class PlayerController : MonoBehaviour
 
     public void playerAttack()
     {
+        if (enemyController.fightStarted == false)
+        {
+            enemyController.fightStarted = true;
+            enemyController.fight();
+        }
         if (playerStats.getMana() > spellManaCost)
         {
             int newEnemyHealth = enemyController.enemyStats.getHealth() - attackStrength;
@@ -100,6 +111,11 @@ public class PlayerController : MonoBehaviour
 
     public void playerMalice()
     {
+        if (enemyController.fightStarted == false)
+        {
+            enemyController.fightStarted = true;
+            enemyController.fight();
+        }
         if (playerStats.getMana() > spellManaCost)
         {
             StopMaliceCor();
