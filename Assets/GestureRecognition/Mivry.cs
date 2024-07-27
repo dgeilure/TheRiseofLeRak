@@ -481,7 +481,7 @@ public class Mivry : MonoBehaviour
     {
         InputControl control = InputSystem.FindControl(controlName); // eg: "<XRController>{RightHand}/trigger"
         if (control == null) {
-            Debug.LogError($"Mivry.getInputControlValue : Control '{controlName}' not found.");
+            //Debug.LogError($"Mivry.getInputControlValue : Control '{controlName}' not found.");
             return 0.0f;
         }
         return getInputControlValue(control);

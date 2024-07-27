@@ -32,27 +32,27 @@ public class EnemyController : MonoBehaviour
 
     private Coroutine maliceCor;
 
-    private string[] lowHealthSpells;
-    private string[] midHealthSpells;
-    private string[] highHealthSpells;
+    private string[] lowHealthSpells = new string[100];
+    private string[] midHealthSpells = new string[100];
+    private string[] highHealthSpells = new string[100];
 
 
     private void Start()
     {
-        enemyStats = new CharacterStats(200,200);
-        
+        enemyStats = new CharacterStats(200, 200);
+
         enemyMaxHealth = enemyStats.getHealth();
 
         enemyHeal = enemyMaxHealth / 4; // 1 fourth of health gets healed when you heal
 
-        lowHealthSpells = generateSpellProbabilityArrays(10,50,40);
-        midHealthSpells = generateSpellProbabilityArrays(40,30,30);
-        highHealthSpells = generateSpellProbabilityArrays(70,10,20);
+        lowHealthSpells = generateSpellProbabilityArrays(10, 50, 40);
+        midHealthSpells = generateSpellProbabilityArrays(40, 30, 30);
+        highHealthSpells = generateSpellProbabilityArrays(70, 10, 20);
     }
 
-    private string [] generateSpellProbabilityArrays(int probabilityA, int probabilityP, int probabilityM) 
+    private string[] generateSpellProbabilityArrays(int probabilityA, int probabilityP, int probabilityM)
     {
-        string [] spellArray = {};
+        string[] spellArray = new string[100];
 
         // probability of each attack in %
         // sums up to 100 (%)
@@ -61,9 +61,9 @@ public class EnemyController : MonoBehaviour
         int maliceProbability = probabilityM;
 
         // fills spellArray with spells 
-        fillSpellArray (spellArray, attackProbability, "Attack"); // Attack Spell
-        fillSpellArray (spellArray, protectionProbability, "Protection"); // Protection Spell
-        string[] arr = fillSpellArray (spellArray, maliceProbability, "Malice"); // Malice Spell
+        fillSpellArray(spellArray, attackProbability, "Attack"); // Attack Spell
+        fillSpellArray(spellArray, protectionProbability, "Protection"); // Protection Spell
+        string[] arr = fillSpellArray(spellArray, maliceProbability, "Malice"); // Malice Spell
 
         return arr;
     }
@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
         Debug.Log("LeRak chose this spell: " + spell);
 
         //call corresponding method
-        switch(spell)
+        switch (spell)
         {
             case "Attack":
                 enemyAttack();
@@ -140,9 +140,9 @@ public class EnemyController : MonoBehaviour
     {
         return currentDelay + spellModifier;
     }
-   
+
     //sets base delay depending on the health of enemy
-    private float calculateDelay(float healthModifier) 
+    private float calculateDelay(float healthModifier)
     {
         float delay = (Random.Range(5.0f, 10.0f)) + healthModifier;
         return delay;
@@ -151,9 +151,10 @@ public class EnemyController : MonoBehaviour
     // fills spellArray with spells
     private string[] fillSpellArray(string[] spellArray, int spellProbability, string spellIdentifier)
     {
+        Debug.Log("AAAAAAAAAAAAAAAAA" + spellArray + spellProbability + spellIdentifier);
         for (int i = 0; i < spellProbability; i++)
         {
-            spellArray[spellArray.Length] = spellIdentifier;
+            spellArray[i] = spellIdentifier;
         }
         return spellArray;
     }
@@ -168,7 +169,7 @@ public class EnemyController : MonoBehaviour
 
         HealEnemy(enemyHeal);
 
-        Debug.Log("ENEMY PROTECT, Health: " + enemyStats.getHealth());    
+        Debug.Log("ENEMY PROTECT, Health: " + enemyStats.getHealth());
     }
 
     public void enemyAttack()
