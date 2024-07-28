@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731716, g: 0.13414738, b: 0.121078566, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3081,6 +3081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 659700052}
+  fightStarted: 0
 --- !u!4 &1426503500
 Transform:
   m_ObjectHideFlags: 0
@@ -3707,7 +3708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   table: {fileID: 584931655}
-  player: {fileID: 0}
+  player: {fileID: 659700052}
 --- !u!4 &1608412309
 Transform:
   m_ObjectHideFlags: 0
@@ -4806,7 +4807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 681676387681655743, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0058597545
+      value: -0.004726987
       objectReference: {fileID: 0}
     - target: {fileID: 3266112647597789850, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -4894,6 +4895,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5883990798358420152, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5883990798358420152, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8263296870093921487, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}

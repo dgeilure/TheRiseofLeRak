@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
         playerHeal = playerMaxHealth / 4; // 1 fourth of health gets healed
 
-        StartCoroutine(RegenerateMana(2,3)); //3 mana every 2 seconds
+        StartCoroutine(RegenerateMana(15,3)); //3 mana every 7 seconds
     }
 
     //---
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
             playerStats.setMana(0);
         }
 
-        Debug.Log("Player Mana:" + playerStats.getMana());
+        Debug.Log("-, Player Mana:" + playerStats.getMana());
     }    
     
     private void AddMana(int amount)
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
             playerStats.setMana(playerMaxMana);
         }
 
-        Debug.Log("Player Mana:" + playerStats.getMana());
+        Debug.Log("+, Player Mana:" + playerStats.getMana());
     }
 
     private void HealPlayer(int healthIncrease)
@@ -182,9 +182,11 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < iterations; i++)
         {
             enemyCurrentHealth = enemyController.enemyStats.getHealth();
+            Debug.Log("Malicing enemy, current health: " + enemyCurrentHealth);
             if ((enemyCurrentHealth - maliceStrength) > 0)
             {
-                enemyController.enemyStats.setHealth(enemyCurrentHealth - maliceStrength);
+                Debug.Log("Malicing enemy, setting health to: " + (enemyCurrentHealth - maliceStrength));
+                enemyController.enemyStats.setHealth(enemyCurrentHealth - maliceStrength); //????????????
                 HealPlayer(maliceStrength);
             }
             else
@@ -202,8 +204,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator RegenerateMana(float buffer, int mana)
     {
-        AddMana(mana);
-        yield return new WaitForSecondsRealtime(buffer);
+        while (true)
+        {
+            AddMana(mana);
+            yield return new WaitForSecondsRealtime(buffer);
+        }
     }
 
     private void StopMaliceCor()

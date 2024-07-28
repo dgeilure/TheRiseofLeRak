@@ -50,6 +50,16 @@ public class EnemyController : MonoBehaviour
         highHealthSpells = generateSpellProbabilityArrays(70, 10, 20);
     }
 
+    private string logArr(string[] arr)
+    {
+        string array = "";
+        foreach (string s in arr)
+        {
+            array += " " + s;
+        }
+        return array;
+    }
+
     private string[] generateSpellProbabilityArrays(int probabilityA, int probabilityP, int probabilityM)
     {
         string[] spellArray = new string[100];
@@ -61,9 +71,9 @@ public class EnemyController : MonoBehaviour
         int maliceProbability = probabilityM;
 
         // fills spellArray with spells 
-        fillSpellArray(spellArray, attackProbability, "Attack"); // Attack Spell
-        fillSpellArray(spellArray, protectionProbability, "Protection"); // Protection Spell
-        string[] arr = fillSpellArray(spellArray, maliceProbability, "Malice"); // Malice Spell
+        fillSpellArray(0, spellArray, attackProbability, "Attack"); // Attack Spell
+        fillSpellArray(attackProbability, spellArray, protectionProbability, "Protection"); // Protection Spell
+        string[] arr = fillSpellArray(attackProbability+protectionProbability, spellArray, maliceProbability, "Malice"); // Malice Spell
 
         return arr;
     }
@@ -149,12 +159,12 @@ public class EnemyController : MonoBehaviour
     }
 
     // fills spellArray with spells
-    private string[] fillSpellArray(string[] spellArray, int spellProbability, string spellIdentifier)
+    private string[] fillSpellArray(int beginning, string[] spellArray, int spellProbability, string spellIdentifier)
     {
         Debug.Log("AAAAAAAAAAAAAAAAA" + spellArray + spellProbability + spellIdentifier);
         for (int i = 0; i < spellProbability; i++)
         {
-            spellArray[i] = spellIdentifier;
+            spellArray[beginning+i] = spellIdentifier;
         }
         return spellArray;
     }
@@ -233,6 +243,7 @@ public class EnemyController : MonoBehaviour
                 playerController.playerStats.setHealth(0);
                 //does not heal if player dies from the attack! because.. like why lol you already won
             }
+            Debug.Log("Malicing player, player-health: " + playerCurrentHealth);
             yield return new WaitForSecondsRealtime(1);
         }
     }

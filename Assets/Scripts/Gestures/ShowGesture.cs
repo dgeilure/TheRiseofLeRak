@@ -60,10 +60,10 @@ public class ShowGesture : MonoBehaviour
     {
         if (callbackContext.action.type == InputActionType.Button)
         {
-            Debug.Log("BUTTON");
+            //Debug.Log("BUTTON");
             if (callbackContext.started)
             {
-                Debug.Log("STARTED");
+                //Debug.Log("STARTED");
                 StopGestureCor();
                 DestroyObjects();
                 gesturing = true;
@@ -94,7 +94,7 @@ public class ShowGesture : MonoBehaviour
         Vector3 tipPosition;
         Quaternion objectRotation = Quaternion.identity; //corresponds to 0 rotation, is aligned with parent or world axes
         //above can be randomized later if 3d object is chosen
-        Debug.Log("gonna add objects");
+        //Debug.Log("gonna add objects");
         while (gesturing)
         {
             tipPosition = wandTip.transform.position;
