@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private EnemyController enemyController;
 
+    [SerializeField]
+    private LightingControl lifeLightPlayer;
+    [SerializeField]
+    private LightingControl manaLightPlayer;
+
     public CharacterStats playerStats;
 
     private int playerMaxHealth;
@@ -51,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        playerStats = new CharacterStats();
+        playerStats = new CharacterStats(120,120);
 
         playerMaxHealth = playerStats.getHealth();
         playerMaxMana = playerStats.getMana();
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
             SubtractMana();
         }
+        enemyController.UpdateLifeEnemy();
     }
 
     public void playerMalice()
@@ -143,6 +149,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log("-, Player Mana:" + playerStats.getMana());
+        UpdateManaPlayer();
     }    
     
     private void AddMana(int amount)
@@ -159,6 +166,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log("+, Player Mana:" + playerStats.getMana());
+        UpdateManaPlayer();
     }
 
     private void HealPlayer(int healthIncrease)
@@ -171,6 +179,7 @@ public class PlayerController : MonoBehaviour
         {
             playerStats.setHealth(playerMaxHealth);
         }
+        UpdateLifePlayer();
     }
 
     //coroutine
@@ -194,6 +203,7 @@ public class PlayerController : MonoBehaviour
                 enemyController.enemyStats.setHealth(0);
                 //does not heal if enemy dies from the attack! because.. like why lol you already won
             }
+            enemyController.UpdateLifeEnemy();
             yield return new WaitForSecondsRealtime(1);
         }
     }
@@ -214,5 +224,19 @@ public class PlayerController : MonoBehaviour
     private void StopMaliceCor()
     {
         if (maliceCor != null) StopCoroutine(maliceCor);
+    }
+
+
+    //visuals - lights
+    public void UpdateLifePlayer()
+    {
+        int lights = (int)Mathf.CeilToInt(playerStats.getHealth() / 10.0f);
+        lifeLightPlayer.UpdateLight(lights);
+    }
+
+    public void UpdateManaPlayer()
+    {
+        int lights = (int)Mathf.CeilToInt(playerStats.getMana() / 10.0f);
+        manaLightPlayer.UpdateLight(lights);
     }
 }

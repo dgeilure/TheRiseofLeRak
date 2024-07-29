@@ -18,6 +18,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
 
+    [SerializeField]
+    private LightingControl lifeLightEnemy;
+
     public CharacterStats enemyStats;
 
     public bool fightStarted = false;
@@ -39,7 +42,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        enemyStats = new CharacterStats(200, 200);
+        enemyStats = new CharacterStats(240, 200);
 
         enemyMaxHealth = enemyStats.getHealth();
 
@@ -195,6 +198,7 @@ public class EnemyController : MonoBehaviour
             playerController.playerStats.setHealth(0);
         }
 
+        playerController.UpdateLifePlayer();
         Debug.Log("ENEMY ATTACK, Player Health: " + playerController.playerStats.getHealth());
     }
 
@@ -217,6 +221,7 @@ public class EnemyController : MonoBehaviour
         {
             enemyStats.setHealth(enemyMaxHealth);
         }
+        UpdateLifeEnemy();
     }
 
     private void StopMaliceCor()
@@ -244,9 +249,21 @@ public class EnemyController : MonoBehaviour
                 //does not heal if player dies from the attack! because.. like why lol you already won
             }
             Debug.Log("Malicing player, player-health: " + playerCurrentHealth);
+
+            playerController.UpdateLifePlayer();
             yield return new WaitForSecondsRealtime(1);
         }
     }
+
+    //visuals - lights
+    public void UpdateLifeEnemy()
+    {
+        int lights = (int)Mathf.CeilToInt(enemyStats.getHealth() / 10.0f)/2;
+        Debug.Log("-------------------" + lights);
+        lifeLightEnemy.UpdateLight(lights);
+    }
+
+
 
     /*
     private void detectHarms ()
