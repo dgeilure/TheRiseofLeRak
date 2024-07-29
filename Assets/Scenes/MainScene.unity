@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -691,7 +691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &80866079
 Transform:
   m_ObjectHideFlags: 0
@@ -1545,7 +1545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &229213465
 Transform:
   m_ObjectHideFlags: 0
@@ -2083,6 +2083,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 546744fb5ad2c2440a97beba3fb4469f, type: 3}
+    - target: {fileID: 4655619518832532654, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4713826754852454043, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6
@@ -2176,6 +2180,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8012630560446780050, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982720960299799579, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2289,6 +2297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456718000}
+  - component: {fileID: 456718001}
   m_Layer: 0
   m_Name: LeRakFlamesDisplay
   m_TagString: Untagged
@@ -2314,6 +2323,21 @@ Transform:
   - {fileID: 706313800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &456718001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456717999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d338ea0901aa16e47b81dc1f003d8fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flameAttack: {fileID: 706313799}
+  flameProtection: {fileID: 229213464}
+  flameMalice: {fileID: 701652184}
 --- !u!1001 &461456435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2546,7 +2570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &495531865
 Transform:
   m_ObjectHideFlags: 0
@@ -2981,7 +3005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &701652185
 Transform:
   m_ObjectHideFlags: 0
@@ -3019,7 +3043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &706313800
 Transform:
   m_ObjectHideFlags: 0
@@ -3902,6 +3926,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8982720960299799579, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6644634281239494302, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
@@ -4355,7 +4383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1071535266
 Transform:
   m_ObjectHideFlags: 0
@@ -5369,6 +5397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 659700052}
   lifeLightEnemy: {fileID: 17088388}
+  enemyDispl: {fileID: 456718001}
   fightStarted: 0
 --- !u!4 &1426503500
 Transform:
@@ -6397,6 +6426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   table: {fileID: 584931655}
   player: {fileID: 659700052}
+  playerDispl: {fileID: 1754435009}
 --- !u!4 &1608412309
 Transform:
   m_ObjectHideFlags: 0
@@ -6878,6 +6908,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8982720960299799579, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6644634281239494302, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
@@ -7067,6 +7101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1754435008}
+  - component: {fileID: 1754435009}
   m_Layer: 0
   m_Name: PlayerGlyphDisplay
   m_TagString: Untagged
@@ -7092,6 +7127,21 @@ Transform:
   - {fileID: 495531865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1754435009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754435007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46879c18c02e6c74c9c2e2f575a8d947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glyphenAttack: {fileID: 80866078}
+  glyphenProtection: {fileID: 1071535265}
+  glyphenMalice: {fileID: 495531864}
 --- !u!1 &1770115452
 GameObject:
   m_ObjectHideFlags: 0
@@ -7771,7 +7821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 681676387681655743, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0066259857
+      value: -0.0032399015
       objectReference: {fileID: 0}
     - target: {fileID: 3266112647597789850, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -8193,6 +8243,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8012630560446780050, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982720960299799579, guid: 979f6a67b63c841c19d7084607d16469, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

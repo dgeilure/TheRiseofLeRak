@@ -21,6 +21,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private LightingControl lifeLightEnemy;
 
+    [SerializeField]
+    private EnemyDisplayFlames enemyDispl;
+
     public CharacterStats enemyStats;
 
     public bool fightStarted = false;
@@ -125,14 +128,17 @@ public class EnemyController : MonoBehaviour
         {
             case "Attack":
                 enemyAttack();
+                enemyDispl.FlameAttackVisible();
                 delay = modifyDelay(delay, 2.0f);
                 break;
             case "Protection":
                 enemyProtection();
+                enemyDispl.FlameProtectionVisible();
                 delay = modifyDelay(delay, 1.0f);
                 break;
             case "Malice":
                 enemyMalice();
+                enemyDispl.FlameMaliceVisible();
                 delay = modifyDelay(delay, 3.5f);
                 break;
             default:

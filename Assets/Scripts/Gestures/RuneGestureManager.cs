@@ -13,6 +13,9 @@ public class RuneGestureManager : MonoBehaviour
     [SerializeField]//d 
     private PlayerController player;//d
 
+    [SerializeField]
+    private PlayerDisplayGlyph playerDispl;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,21 +45,21 @@ public class RuneGestureManager : MonoBehaviour
             {
                 tableMaterial.SetColor("_Color", Color.red); //d
                 Debug.Log("Gesture = Attack");//d
-            
+                playerDispl.GlyphAttackVisible();
                 player.playerAttack(); //d
             }
             if (gestureCompletionData.gestureID == 1 || gestureCompletionData.gestureID == 4) //d
             {
                 tableMaterial.SetColor("_Color", Color.green); //d
                 Debug.Log("Gesture = Protect");//d
-
+                playerDispl.GlyphProtectionVisible();
                 player.playerProtection();
             }            
             if (gestureCompletionData.gestureID == 2 || gestureCompletionData.gestureID == 5)//d
             {
                 tableMaterial.SetColor("_Color", Color.magenta); //d
                 Debug.Log("Gesture = Malice");//d
-
+                playerDispl.GlyphMaliceVisible();
                 player.playerMalice();
             }
         }
