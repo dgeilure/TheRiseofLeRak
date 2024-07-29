@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 public class ShowGesture : MonoBehaviour
 {
@@ -27,15 +25,47 @@ public class ShowGesture : MonoBehaviour
 
     private Coroutine showGestureCor;
 
-    [SerializeField][Tooltip("Empty GameObject positioned on the tip of the wand")] 
+    [SerializeField]
+    [Tooltip("Empty GameObject positioned on the tip of the wand")]
     private GameObject wandTip;
 
-    [SerializeField][Tooltip("Prefab of the object that is displayed as the trail of the wand (to visualize the gesture)")]
-    private GameObject gestureVisualisationPrefab;
+    [SerializeField]
+    [Tooltip("How quick the object in the prefab gets spawned, in seconds")]
+    [Range(0.0001f, 1)]
+    private float timeBetweenPoints = 0.1f;
 
-    [SerializeField][Tooltip("How quick the object in the prefab gets spawned, in seconds")]
-    [Range(0.0001f,1)]
-    private float timeBetweenSpawns;
+    private LineRenderer lineRenderer;
+    private List<Vector3> points = new List<Vector3>();
+
+    private void Start()
+    {
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.positionCount = 0;
+        // Set line renderer properties as needed
+        lineRenderer.startWidth = 0.02f;
+        lineRenderer.endWidth = 0.02f;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+
+        // Create a gradient with rainbow colors
+        Gradient gradient = new Gradient();
+        gradient.SetKeys(
+            new GradientColorKey[]
+            {
+                new GradientColorKey(Color.red, 0.0f),
+                new GradientColorKey(Color.yellow, 0.2f),
+                new GradientColorKey(Color.green, 0.4f),
+                new GradientColorKey(Color.cyan, 0.6f),
+                new GradientColorKey(Color.blue, 0.8f),
+                new GradientColorKey(Color.magenta, 1.0f)
+            },
+            new GradientAlphaKey[]
+            {
+                new GradientAlphaKey(1.0f, 0.0f),
+                new GradientAlphaKey(1.0f, 1.0f)
+            }
+        );
+        lineRenderer.colorGradient = gradient;
+    }
 
     // functions
 
@@ -45,8 +75,8 @@ public class ShowGesture : MonoBehaviour
     {
         InputHandler(context);
         Debug.Log("LEFT TRIGGER");
-    }    
-    
+    }
+
     // gets called when right trigger gets pressed
     // parameter is info from event
     public void OnInputRightTrigger(InputAction.CallbackContext context)
@@ -60,14 +90,14 @@ public class ShowGesture : MonoBehaviour
     {
         if (callbackContext.action.type == InputActionType.Button)
         {
-            //Debug.Log("BUTTON");
+            Debug.Log("BUTTON");
             if (callbackContext.started)
             {
-                //Debug.Log("STARTED");
+                Debug.Log("STARTED");
                 StopGestureCor();
-                DestroyObjects();
+                ClearLine();
                 gesturing = true;
-                showGestureCor = StartCoroutine(AddObject(timeBetweenSpawns));
+                showGestureCor = StartCoroutine(AddPoint(timeBetweenPoints));
             }
             if (callbackContext.canceled)
             {
@@ -76,7 +106,7 @@ public class ShowGesture : MonoBehaviour
                 gesturing = false;
                 //TO DO start new countdown cor (like maybe 2 seconds) where gesture stays, then disappears
                 //--> in there: gesture disappears (gameobjects get removed)
-                DestroyObjects();
+                ClearLine();
             }
             return;
         }
@@ -87,39 +117,29 @@ public class ShowGesture : MonoBehaviour
         if (showGestureCor != null) StopCoroutine(showGestureCor);
     }
 
-    //adds objects at the tip of the wand over time while you are gesturing
+    //adds points to the line renderer over time while you are gesturing
     //parameter: time (what time between the addition of an object, for example 0.1f = 0.1 seconds)
-    private IEnumerator AddObject(float time) 
+    private IEnumerator AddPoint(float time)
     {
-        Vector3 tipPosition;
-        Quaternion objectRotation = Quaternion.identity; //corresponds to 0 rotation, is aligned with parent or world axes
-        //above can be randomized later if 3d object is chosen
-        //Debug.Log("gonna add objects");
+        Debug.Log("gonna add points");
         while (gesturing)
         {
-            tipPosition = wandTip.transform.position;
-
-            //instantiate object at tip position
-            //should also have a transform parent as the last parameter so that the objects don't just float around randomly in the hierarchy 
-            //this.transform if the script is on another gameobject
-            Instantiate(gestureVisualisationPrefab, tipPosition, objectRotation, this.transform);
-            //Debug.Log("GESTURING");
+            Vector3 tipPosition = wandTip.transform.position;
+            if (points.Count == 0 || Vector3.Distance(points[points.Count - 1], tipPosition) > 0.01f)
+            {
+                points.Add(tipPosition);
+                lineRenderer.positionCount = points.Count;
+                lineRenderer.SetPosition(points.Count - 1, tipPosition);
+            }
             yield return new WaitForSeconds(time);
         }
         yield return new WaitForSeconds(time);
     }
 
-    //the object with the script attached (so the current "this") CANNOT HAVE CHILD-OBJECTS since they get deleted with this method 
-    //every time the trigger on the controller gets pressed
-    private void DestroyObjects()
+    // Clears the line renderer
+    private void ClearLine()
     {
-        int particleCount = this.transform.childCount;
-        if (particleCount > 0)
-        {
-            for (int i = 0; i < particleCount; i++)
-            {
-                Destroy(this.transform.GetChild(i).gameObject);
-            }
-        }
+        points.Clear();
+        lineRenderer.positionCount = 0;
     }
 }
