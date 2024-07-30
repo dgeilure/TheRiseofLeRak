@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731716, g: 0.13414738, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5398,6 +5398,7 @@ MonoBehaviour:
   playerController: {fileID: 659700052}
   lifeLightEnemy: {fileID: 17088388}
   enemyDispl: {fileID: 456718001}
+  leRakDisplay: {fileID: 741718779}
   fightStarted: 0
 --- !u!4 &1426503500
 Transform:
@@ -7821,7 +7822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 681676387681655743, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0032399015
+      value: -0.018179286
       objectReference: {fileID: 0}
     - target: {fileID: 3266112647597789850, guid: 1faad593d88404f1fa6bdae7b819642f, type: 3}
       propertyPath: m_PresetInfoIsWorld

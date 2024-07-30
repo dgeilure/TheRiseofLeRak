@@ -24,6 +24,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private EnemyDisplayFlames enemyDispl;
 
+    [SerializeField]
+    private GameObject leRakDisplay;
+
     public CharacterStats enemyStats;
 
     public bool fightStarted = false;
@@ -84,7 +87,7 @@ public class EnemyController : MonoBehaviour
         return arr;
     }
 
-    // Das LeRak-Gefühl ist das, was uns alle zusammenhält
+    // Das LeRak-Gefï¿½hl ist das, was uns alle zusammenhï¿½lt
     // The fight pattern for the enemy
     public void fight()
     {
@@ -151,7 +154,16 @@ public class EnemyController : MonoBehaviour
         {
             //waits a "delay" amount of time before calling the next round of fight
             Invoke(nameof(fight), delay);
-        } // else game over, but we don't have that yet
+        } 
+        else if(playerController.playerStats.getHealth() <= 0)
+        {
+            // else game over, but we don't have that yet
+            //no grphic yet, but the fight-loop just ends
+        }
+        else if (enemyStats.getHealth() <= 0) 
+        {
+            leRakDisplay.SetActive(false);
+        }
     }
 
     //modifes delay depending on the spell that gets cast
